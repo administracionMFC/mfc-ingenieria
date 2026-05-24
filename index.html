@@ -283,7 +283,7 @@
 <nav role="navigation" aria-label="Menú principal">
   <div>
     <a href="#inicio" aria-label="MFC Ingeniería Aplicada — ir al inicio">
-      <img src="logo-dark.png" alt="MFC Ingeniería Aplicada" width="120" height="44" style="height:44px;width:auto;display:block;" loading="eager">
+      <img src="logo.png" alt="MFC Ingeniería Aplicada" height="44" style="height:44px;width:auto;display:block;" loading="eager">
     </a>
   </div>
   <ul class="nav-links">
@@ -494,9 +494,9 @@
       <div class="section-tag" style="margin-bottom:8px;">Formulario de contacto</div>
       <p style="font-size:14px;color:var(--gray-mid);margin-bottom:24px;">Te responderemos a la brevedad.</p>
     </div>
-    <form id="contacto-form" action="https://formspree.io/f/mdajdbrq" method="POST">
+    <form id="contacto-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
       <input type="hidden" name="_subject" value="Has recibido un nuevo mensaje desde la web MFC">
-      <input type="hidden" name="_next" value="https://www.mfcingenieria.cl/#contacto">
+      <input type="hidden" name="_next" value="https://www.mfcingenieria.cl/?enviado=true#contacto">
       <div class="form-group">
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
@@ -531,7 +531,7 @@
 <!-- FOOTER -->
 <footer role="contentinfo">
   <div style="display:flex;align-items:center;gap:16px;">
-    <img src="logo-dark.png" alt="MFC Ingeniería Aplicada" width="80" height="40" style="height:40px;width:auto;" loading="lazy">
+    <img src="logo.png" alt="MFC Ingeniería Aplicada" height="40" style="height:40px;width:auto;" loading="lazy">
     <div>
       <div class="footer-brand">MFC Ingeniería Aplicada</div>
       <div class="footer-rut">RUT: 78.296.601-4</div>
@@ -539,6 +539,25 @@
   </div>
   <div>© 2025 MFC Ingeniería Aplicada. Todos los derechos reservados.</div>
 </footer>
+
+<script>
+  // Mensaje de éxito tras envío del formulario
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('enviado') === 'true') {
+      const form = document.getElementById('contacto-form');
+      const success = document.getElementById('form-success');
+      if (form && success) {
+        form.style.display = 'none';
+        success.style.display = 'flex';
+        // Scroll suave a la sección de contacto
+        document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+        // Limpiar el parámetro de la URL sin recargar
+        window.history.replaceState({}, document.title, window.location.pathname + '#contacto');
+      }
+    }
+  })();
+</script>
 
 </body>
 </html>
